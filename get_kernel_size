@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# DESCRIPTION:
+#
+# In the file "boot_stage1.asm", there is a routine that reads the kernel
+# from the boot-disk into physical memory at 0x100000 (1 MiB). That routine
+# needs to know how many sectors to read (i.e. how many sectors the kernel
+# occupies on the disk).
+#
+# The macro "kernel_size" indicates the number of sectors that need to be
+# read for the kernel. As the kernel is under development, its size is
+# subject to change after any modification.
+#
+# This script modifies the line "%define kernel_size" in "boot_stage1.asm".
+# A new file is made: ".stage1_correct_kernel_size.asm", where the macro
+# "kernel_size" now indicates the correct number of sectors occupied by the
+# kernel at build-time.
+
+
+KERNEL_SIZE=`du -b kernel.bin | sed 's/\([0-9]*\).*/\1/'`
+KERNEL_SIZE=$(($KERNEL_SIZE/512)) # 1 sector = 512 bytes
+
+sed "s/\(%define kernel_size \)\s*[0-9][0-9]*\(\s*[;.*]*\)/\1${KERNEL_SIZE}\2/" boot_stage1.asm > .stage1_correct_kernel_size.asm
