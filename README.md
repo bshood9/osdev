@@ -82,7 +82,7 @@ Wrapper-routines for x86 instructions; not currently used; these are pretty usel
 
 ## Drivers
 
-The PIC is initialized by sending it a sequence of four control words. The PIT is initialized by sending it a single control word, followed by a 2-byte count (to set the counter). Both of these devices have complex features that my code doesn't use (some of which are even *unavailable* to IBM PC-compatible systems). The PS/2 controller is a much more sophisticated microcontroller than the PIC and the PIT. Coorespondingly, it has a much more sophisticated initialization process, and many more features than we care about.
+The PIC is initialized by sending it a sequence of four control words. The PIT is initialized by sending it a single control word, followed by a 2-byte count (to set the counter). Both of these devices have complex features that my code doesn't use (some of which are even *unavailable* to IBM PC-compatible systems). The PS/2 controller is a much more sophisticated microcontroller than the PIC and the PIT. Correspondingly, it has a much more sophisticated initialization process, and many more features than we care about.
 
 The PIC and the PIT files are located in the root directory rather than the "drivers" subdirectory; this is an inconsistency, and I will probably relocate them to the "drivers" subdirectory at some point...
 
